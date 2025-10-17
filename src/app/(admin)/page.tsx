@@ -1,4 +1,3 @@
-import ModuleList from "@/components/module/ModuleList";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ModuleList />;
+  return <div>Dashboard</div>;
 }
