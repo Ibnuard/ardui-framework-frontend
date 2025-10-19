@@ -1,12 +1,14 @@
 "use client";
 
 import {
+  CardListItem,
   CardMenuItem,
   ComponentCard,
   HeaderActionCard,
 } from "@/components/card";
 import CustomSelect from "@/components/form/CustomSelect";
 import Input from "@/components/form/input/InputField";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 export default function MenuManagement() {
@@ -66,7 +68,19 @@ export default function MenuManagement() {
 
             <div>
               <ComponentCard title="Submenu">
-                <div>test</div>
+                <CardListItem
+                  title="Test"
+                  renderAction={
+                    <div className="flex flex-row items-center gap-2">
+                      <div className="cursor-pointer p-2 rounded-md border hover:bg-gray-50">
+                        <PencilIcon className="w-4 h-4 text-brand-500" />
+                      </div>
+                      <div className="cursor-pointer p-2 rounded-md border hover:bg-gray-50">
+                        <TrashIcon className="w-4 h-4 text-red-500" />
+                      </div>
+                    </div>
+                  }
+                />
               </ComponentCard>
             </div>
           </div>
