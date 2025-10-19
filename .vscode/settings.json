@@ -1,12 +1,6 @@
 {
-"tailwindCSS.experimental.configFile": "src/app/globals.css",
-  "tailwindCSS.includeLanguages": {
-    "typescriptreact": "html",
-    "html": "html",
-    "javascript": "javascript",
-    "css": "css"
+  "files.associations": {
+    "*.css": "tailwindcss"
   },
-  "editor.quickSuggestions": {
-    "strings": true
-  }
+  "tailwindCSS.experimental.configFile": "src/app/globals.css"
 }
