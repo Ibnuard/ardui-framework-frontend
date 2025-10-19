@@ -2,6 +2,7 @@
 
 import React from "react";
 import ReactSelect, { SingleValue } from "react-select";
+import Label from "./Label";
 
 interface Option {
   value: string;
@@ -19,6 +20,7 @@ interface CustomSelectProps {
   isClearable?: boolean;
   isSearchable?: boolean;
   value: string | undefined;
+  label?: string;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -31,6 +33,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   isClearable = true,
   isSearchable = true,
   value,
+  label,
 }) => {
   const selectedOption = options.find((opt) => opt.value === value) ?? null;
 
@@ -78,6 +81,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
 
   return (
     <div className={`w-full space-y-1 ${className}`}>
+      {label && <Label>{label || "label"}</Label>}
       <ReactSelect
         options={options}
         placeholder={placeholder}

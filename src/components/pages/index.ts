@@ -1,1 +1,3 @@
-export * from "./menu";
+import MenuManagement from "./menu/MenuManagement";
+
+export { MenuManagement };
