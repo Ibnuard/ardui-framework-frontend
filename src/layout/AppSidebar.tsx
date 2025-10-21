@@ -1,12 +1,16 @@
 "use client";
 import { sysadminNavItems } from "@/config/SystemAdminMenu";
 import { NavItem } from "@/types";
+import {
+  ChevronDownIcon,
+  EllipsisHorizontalIcon,
+} from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSidebar } from "../context/SidebarContext";
-import { ChevronDownIcon, HorizontaLDots } from "../icons/index";
+//import { ChevronDownIcon, HorizontaLDots } from "../icons/index";
 
 const navItems = sysadminNavItems;
 
@@ -242,7 +246,7 @@ const AppSidebar: React.FC = () => {
                 {isExpanded || isHovered || isMobileOpen ? (
                   "Menu"
                 ) : (
-                  <HorizontaLDots />
+                  <EllipsisHorizontalIcon className="w-7 h-7" />
                 )}
               </h2>
               {renderMenuItems(navItems, "main")}

@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Icon, IconName } from "@/icons/HeroIcons"; // from your earlier mapping
 import { useModal } from "@/hooks/useModal";
 import Button from "../ui/button/Button";
 import { Modal } from "../ui/modal";
+import { Icon, IconName } from "@/icons/HeroIcons";
+import SearchBar from "../form/SearchBar";
 
 interface IconSelectorModalProps {
   onSelect: (iconName: IconName) => void;
@@ -32,25 +33,17 @@ export default function IconSelectorModal({
   return (
     <div>
       <Button size="sm" onClick={openModal}>
-        {selected ? "Ganti Icon" : "Pilih Icon"}
+        {selected ? "Change Icon" : "Select Icon"}
       </Button>
 
-      <Modal
-        isOpen={isOpen}
-        onClose={closeModal}
-        className="max-w-3xl p-5 lg:p-8"
-      >
+      <Modal isOpen={isOpen} onClose={closeModal} className="w-3xl p-5 lg:p-8">
         <h4 className="font-semibold text-gray-800 mb-5 text-title-sm dark:text-white/90">
-          Pilih Icon
+          Select Icon
         </h4>
 
-        <input
-          type="text"
-          placeholder="Cari icon..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full p-2 mb-4 border rounded text-sm"
-        />
+        <div className="mb-8">
+          <SearchBar onSubmit={(keyword: string) => setSearch(keyword)} />
+        </div>
 
         <div className="grid grid-cols-6 gap-4 max-h-[400px] overflow-y-auto">
           {filteredIcons.map((name) => {
@@ -66,12 +59,6 @@ export default function IconSelectorModal({
               </button>
             );
           })}
-        </div>
-
-        <div className="flex justify-end gap-2 mt-6">
-          <Button variant="outline" size="sm" onClick={closeModal}>
-            Batal
-          </Button>
         </div>
       </Modal>
     </div>

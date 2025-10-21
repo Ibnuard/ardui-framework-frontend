@@ -1,4 +1,5 @@
 import React from "react";
+import Label from "../Label";
 
 interface TextareaProps {
   placeholder?: string; // Placeholder text
@@ -9,6 +10,8 @@ interface TextareaProps {
   disabled?: boolean; // Disabled state
   error?: boolean; // Error state
   hint?: string; // Hint text to display
+  label?: string;
+  required?: boolean;
 }
 
 const TextArea: React.FC<TextareaProps> = ({
@@ -20,6 +23,8 @@ const TextArea: React.FC<TextareaProps> = ({
   disabled = false, // Disabled state
   error = false, // Error state
   hint = "", // Default hint text
+  label,
+  required,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) {
@@ -39,6 +44,7 @@ const TextArea: React.FC<TextareaProps> = ({
 
   return (
     <div className="relative">
+      {label && <Label required={required}>{label || "label"}</Label>}
       <textarea
         placeholder={placeholder}
         rows={rows}

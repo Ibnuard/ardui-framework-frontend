@@ -66,6 +66,7 @@ const columns = [
 export default function ModuleView() {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
+  const VIEW_PATH = "module";
 
   const router = useRouter();
 
@@ -98,7 +99,7 @@ export default function ModuleView() {
             setPage(1);
             setSearch(keyword);
           }}
-          onActionButtonPress={() => router.push("/create")}
+          onActionButtonPress={() => router.push(`${VIEW_PATH}/add`)}
         >
           <DataTable
             data={[]}
