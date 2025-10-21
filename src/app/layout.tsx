@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { AlertProvider } from "@/context/AlertContext";
 import GeneralModalSelector from "@/components/modal/GeneralModalSelector";
 import { useGeneralModal } from "@/hooks/useGeneralModal";
+import { SecureNavigationProvider } from "@/context/SecureNavigationContext";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -25,7 +26,10 @@ export default function RootLayout({
       <body className={`${outfit.className} dark:bg-gray-900`}>
         <ThemeProvider>
           <AlertProvider>
-            <SidebarProvider>{children}</SidebarProvider>
+            <SecureNavigationProvider>
+              <SidebarProvider>{children}</SidebarProvider>
+            </SecureNavigationProvider>
+
             <GeneralModalSelector
               toggle={close}
               visible={visible}

@@ -3,9 +3,11 @@
 import { ComponentCard } from "@/components/card";
 import DataTable from "@/components/common/DataTable";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
+import { useSecureNavigation } from "@/context/SecureNavigationContext";
+import { secureNavigate } from "@/utils/NavigationUtils";
 import { DocumentTextIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { createColumnHelper } from "@tanstack/react-table";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 type Module = {
@@ -69,6 +71,8 @@ export default function ModuleView() {
   const VIEW_PATH = "module";
 
   const router = useRouter();
+  const pathname = usePathname();
+  const { setParams } = useSecureNavigation();
 
   //   useEffect(() => {
   //     fetchData({ page: page, limit: 5, search: search });
@@ -99,7 +103,9 @@ export default function ModuleView() {
             setPage(1);
             setSearch(keyword);
           }}
-          onActionButtonPress={() => router.push(`${VIEW_PATH}/add`)}
+          onActionButtonPress={() =>
+            secureNavigate(router, `${VIEW_PATH}/add`, pathname, setParams)
+          }
         >
           <DataTable
             data={[]}
