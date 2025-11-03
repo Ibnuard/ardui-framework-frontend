@@ -4,6 +4,7 @@ import { CustomSelect, TextArea, Input as BaseInput } from "../form";
 import { Option } from "../form/CustomSelect";
 import { useFormContext, Controller } from "react-hook-form";
 import IconInput from "../form/input/IconPicker";
+import Checkbox from "../form/input/Checkbox";
 
 interface InputProps {
   name: string;
@@ -11,6 +12,7 @@ interface InputProps {
   label?: string;
   optionList?: Option[];
   required?: boolean;
+  disabled?: boolean;
 }
 
 const Input: FC<InputProps> = ({
@@ -19,6 +21,7 @@ const Input: FC<InputProps> = ({
   label,
   optionList = [],
   required,
+  disabled,
 }) => {
   const {
     register,
@@ -39,6 +42,7 @@ const Input: FC<InputProps> = ({
             <TextArea
               label={label}
               value={value}
+              disabled={disabled}
               onChange={(val) => onChange(val)}
               error={!!error}
               hint={error}
@@ -54,6 +58,7 @@ const Input: FC<InputProps> = ({
         <Controller
           name={name}
           control={control}
+          disabled={disabled}
           render={({ field: { onChange, value } }) => (
             <CustomSelect
               label={label}
@@ -63,6 +68,7 @@ const Input: FC<InputProps> = ({
               error={!!error}
               hint={error}
               required={required}
+              disabled={disabled}
             />
           )}
         />
@@ -70,6 +76,23 @@ const Input: FC<InputProps> = ({
 
     case FieldType.IconPicker:
       return <IconInput name={name} label={label} required={required} />;
+
+    case FieldType.Checkbox:
+      return (
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value, ref } }) => (
+            <Checkbox
+              label={label}
+              checked={!!value}
+              onChange={(checked) => onChange(checked)}
+              ref={ref}
+              disabled={disabled}
+            />
+          )}
+        />
+      );
 
     case FieldType.Text:
     default:
@@ -81,6 +104,7 @@ const Input: FC<InputProps> = ({
             <BaseInput
               label={label}
               value={value}
+              disabled={disabled}
               onChange={onChange}
               onBlur={onBlur}
               ref={ref}

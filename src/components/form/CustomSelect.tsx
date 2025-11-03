@@ -22,6 +22,7 @@ interface CustomSelectProps {
   value: string | undefined;
   label?: string;
   required?: boolean;
+  disabled?: boolean;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -36,6 +37,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   value,
   label,
   required,
+  disabled,
 }) => {
   const selectedOption = options.find((opt) => opt.value === value) ?? null;
 
@@ -79,6 +81,10 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       ...base,
       zIndex: 50,
     }),
+    menuPortal: (base: any) => ({
+      ...base,
+      zIndex: 9999, // pastikan di atas semua elemen
+    }),
   };
 
   return (
@@ -95,6 +101,8 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         onChange={(option: SingleValue<Option>) => {
           onChange(option?.value ?? "");
         }}
+        menuPortalTarget={document.body}
+        isDisabled={disabled}
       />
       {error && hint && (
         <p className="text-sm text-red-500 dark:text-red-400">{hint}</p>

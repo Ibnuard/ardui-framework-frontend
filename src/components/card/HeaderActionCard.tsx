@@ -19,7 +19,7 @@ const HeaderActionCard = (props: HeaderActionCard) => {
         <div className="flex flex-row gap-2.5">
           {props.showSaveButton && (
             <Button size={"sm"} onClick={props.onSaveButtonPressed}>
-              Simpan
+              Save
             </Button>
           )}
           {props.showCancelButton && (
@@ -29,7 +29,7 @@ const HeaderActionCard = (props: HeaderActionCard) => {
               className=" ring-red-300 text-red-500"
               onClick={props.onCancelButtonPressed}
             >
-              Batalkan
+              Cancel
             </Button>
           )}
         </div>

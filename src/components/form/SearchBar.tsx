@@ -3,14 +3,27 @@ import { useState } from "react";
 
 type TSearchBar = {
   onSubmit?: (keyword: string) => void;
+  className?: string;
+  size?: "sm" | "md" | "lg" | "full";
 };
 
-export default function SearchBar({ onSubmit }: TSearchBar) {
+export default function SearchBar({
+  onSubmit,
+  className,
+  size = "md",
+}: TSearchBar) {
   const [keyword, setKeyword] = useState("");
 
   const handleClear = () => {
     setKeyword("");
     if (onSubmit) onSubmit("");
+  };
+
+  const WIDTH_SIZE = {
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-sm",
+    full: "w-full",
   };
 
   return (
@@ -20,7 +33,7 @@ export default function SearchBar({ onSubmit }: TSearchBar) {
         if (onSubmit) onSubmit(keyword);
       }}
     >
-      <div className="relative w-full max-w-lg">
+      <div className={`relative ${className ? className : WIDTH_SIZE[size]}`}>
         {/* Left Icon */}
         <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
           <MagnifyingGlassIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />

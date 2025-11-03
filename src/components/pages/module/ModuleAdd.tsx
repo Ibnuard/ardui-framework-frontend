@@ -1,6 +1,7 @@
 "use client";
 
 import { ComponentCard, HeaderActionCard } from "@/components/card";
+import Label from "@/components/form/Label";
 import { Input } from "@/components/input";
 import LoadingPage from "@/components/ui/loading/LoadingPage";
 import { FieldType } from "@/constants";
@@ -35,6 +36,11 @@ export default function ModuleAdd() {
       "module-label": "",
       "module-parent-id": "",
       "module-icon": "FolderIcon",
+      "support-view": false,
+      "support-add": false,
+      "support-edit": false,
+      "support-detail": false,
+      "support-approval": false,
     },
   });
 
@@ -84,6 +90,36 @@ export default function ModuleAdd() {
             label="Module Icon"
             type={FieldType.IconPicker}
           />
+          <div className="flex flex-col gap-4">
+            <Label>Support Page</Label>
+            <div className="flex flex-row items-center gap-4 justify-around">
+              <Input
+                name="support-view"
+                label="Support View"
+                type={FieldType.Checkbox}
+              />
+              <Input
+                name="support-add"
+                label="Support Add"
+                type={FieldType.Checkbox}
+              />
+              <Input
+                name="support-edit"
+                label="Support Edit"
+                type={FieldType.Checkbox}
+              />
+              <Input
+                name="support-detail"
+                label="Support Detail"
+                type={FieldType.Checkbox}
+              />
+              <Input
+                name="support-approval"
+                label="Support Approval"
+                type={FieldType.Checkbox}
+              />
+            </div>
+          </div>
         </FormProvider>
       </ComponentCard>
     </div>

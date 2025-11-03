@@ -12,4 +12,9 @@ export const sysadminNavItems: NavItem[] = [
     name: "Menu",
     subItems: [{ name: "Menu Management", path: "/menu-management" }],
   },
+  {
+    icon: FolderIcon,
+    name: "Layout Builder",
+    path: "/layout-builder",
+  },
 ];

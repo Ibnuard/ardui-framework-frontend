@@ -1,28 +1,17 @@
 "use client";
 
 import {
-  CardListItem,
   CardMenuItem,
   ComponentCard,
   HeaderActionCard,
 } from "@/components/card";
-import CustomSelect from "@/components/form/CustomSelect";
-import Input from "@/components/form/input/InputField";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { Input } from "@/components/input";
+import { FieldType } from "@/constants";
+import { FormProvider, useForm } from "react-hook-form";
 
 export default function MenuManagement() {
+  const methods = useForm({});
   const SAMPLE_SUBMENU = [{ title: "View" }, { title: "Approval" }];
-
-  const [selectedFruit, setSelectedFruit] = useState<string>("banana");
-
-  const fruitOptions = [
-    { value: "apple", label: "Apple 🍎" },
-    { value: "banana", label: "Banana 🍌" },
-    { value: "orange", label: "Orange 🍊" },
-    { value: "mango", label: "Mango 🥭" },
-    { value: "grape", label: "Grape 🍇" },
-  ];
 
   return (
     <div className="flex flex-col h-[calc(100vh-132px)] gap-4 overflow-hidden">
@@ -52,37 +41,13 @@ export default function MenuManagement() {
           title="Menu Detail"
         >
           <div className="flex flex-col gap-4">
-            <Input label="Menu Name" />
-
-            <CustomSelect
-              options={fruitOptions}
-              placeholder="Select a fruit"
-              value={selectedFruit}
-              onChange={(v) => setSelectedFruit(v)}
-              hint={!selectedFruit ? "Please select one fruit" : ""}
-              error={!selectedFruit}
-              isSearchable
-              isClearable
-              label="Module"
-            />
-
-            <div>
-              <ComponentCard title="Submenu">
-                <CardListItem
-                  title="Test"
-                  renderAction={
-                    <div className="flex flex-row items-center gap-2">
-                      <div className="cursor-pointer p-2 rounded-md border hover:bg-gray-50">
-                        <PencilIcon className="w-4 h-4 text-brand-500" />
-                      </div>
-                      <div className="cursor-pointer p-2 rounded-md border hover:bg-gray-50">
-                        <TrashIcon className="w-4 h-4 text-red-500" />
-                      </div>
-                    </div>
-                  }
-                />
-              </ComponentCard>
-            </div>
+            <FormProvider {...methods}>
+              <Input
+                name="module-label"
+                label="Module Label"
+                type={FieldType.Text}
+              />
+            </FormProvider>
           </div>
         </ComponentCard>
       </div>

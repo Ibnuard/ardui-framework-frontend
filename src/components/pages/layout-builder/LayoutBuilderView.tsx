@@ -65,10 +65,10 @@ const columns = [
   }),
 ];
 
-export default function ModuleView() {
+export default function LayoutBuilderView() {
   const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
-  const VIEW_PATH = "module";
+  const VIEW_PATH = "layout-builder";
 
   const router = useRouter();
   const pathname = usePathname();
@@ -92,12 +92,12 @@ export default function ModuleView() {
 
   return (
     <div>
-      <PageBreadcrumb pageTitle="Module Management" />
+      <PageBreadcrumb pageTitle="Layout Builder" />
       <div className="space-y-6">
         <ComponentCard
           showSearchbar
           showActionButton
-          title="Module List"
+          title="Layout List"
           actionButtonTitle="Add"
           onSearch={(keyword) => {
             setPage(1);
