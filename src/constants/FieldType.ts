@@ -9,4 +9,5 @@ export enum FieldType {
   Dropzone = 8,
   DatePicker = 9,
   IconPicker = 10,
+  TimePicker = 11,
 }

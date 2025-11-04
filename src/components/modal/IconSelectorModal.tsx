@@ -5,7 +5,7 @@ import { useModal } from "@/hooks/useModal";
 import Button from "../ui/button/Button";
 import { Modal } from "../ui/modal";
 import { Icon, IconName } from "@/icons/HeroIcons";
-import SearchBar from "../form/SearchBar";
+import SearchBar from "../input/components/SearchBar";
 
 interface IconSelectorModalProps {
   onSelect: (iconName: IconName) => void;

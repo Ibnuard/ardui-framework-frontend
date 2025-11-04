@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "../form/SearchBar";
+import SearchBar from "../input/components/SearchBar";
 import Button from "../ui/button/Button";
 
 interface ComponentCardProps {

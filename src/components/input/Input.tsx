@@ -1,10 +1,18 @@
 import { FieldType } from "@/constants";
 import { FC } from "react";
-import { CustomSelect, TextArea, Input as BaseInput } from "../form";
-import { Option } from "../form/CustomSelect";
 import { useFormContext, Controller } from "react-hook-form";
-import IconInput from "../form/input/IconPicker";
-import Checkbox from "../form/input/Checkbox";
+import { Option } from "./components/CustomSelect";
+import {
+  Checkbox,
+  DatePicker,
+  Dropdown,
+  FileInput,
+  IconInput,
+  InputBase,
+  Radio,
+  Switch,
+  TextArea,
+} from "./components";
 
 interface InputProps {
   name: string;
@@ -51,7 +59,22 @@ const Input: FC<InputProps> = ({
           )}
         />
       );
-      break;
+
+    case FieldType.Switch:
+      return (
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value, ref } }) => (
+            <Switch
+              label={label ?? ""}
+              defaultChecked={!!value}
+              onChange={(checked) => onChange(checked)}
+              disabled={disabled}
+            />
+          )}
+        />
+      );
 
     case FieldType.Dropdown:
       return (
@@ -60,7 +83,7 @@ const Input: FC<InputProps> = ({
           control={control}
           disabled={disabled}
           render={({ field: { onChange, value } }) => (
-            <CustomSelect
+            <Dropdown
               label={label}
               options={optionList}
               value={value}
@@ -94,6 +117,101 @@ const Input: FC<InputProps> = ({
         />
       );
 
+    case FieldType.Radio:
+      return (
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <div className="flex flex-col gap-2">
+              {label && (
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-400">
+                  {label}
+                  {required && <span className="text-red-500 ml-1">*</span>}
+                </label>
+              )}
+
+              <div className="flex flex-wrap gap-3">
+                {optionList.map((opt, idx) => (
+                  <Radio
+                    key={idx}
+                    id={`${name}-${idx}`}
+                    name={name}
+                    value={opt.value}
+                    label={opt.label}
+                    checked={value === opt.value}
+                    onChange={(val) => onChange(val)}
+                    disabled={disabled}
+                  />
+                ))}
+              </div>
+
+              {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+            </div>
+          )}
+        />
+      );
+
+    case FieldType.DatePicker:
+      return (
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <DatePicker
+              id={name}
+              label={label}
+              disabled={disabled}
+              defaultDate={value}
+              onChange={(selectedDates) => {
+                const selectedDate = selectedDates?.[0] ?? null;
+                onChange(selectedDate);
+              }}
+              placeholder="Select date"
+            />
+          )}
+        />
+      );
+
+    case FieldType.TimePicker:
+      return (
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <DatePicker
+              id={name}
+              label={label}
+              mode="time"
+              disabled={disabled}
+              defaultDate={value}
+              onChange={(selectedDates) => {
+                const selectedDate = selectedDates?.[0] ?? null;
+                onChange(selectedDate);
+              }}
+              placeholder="Select time"
+            />
+          )}
+        />
+      );
+
+    case FieldType.File:
+      return (
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange } }) => (
+            <FileInput
+              className="mt-1"
+              disabled={disabled}
+              onResult={({ base64, filename }) => {
+                onChange({ base64, filename });
+              }}
+            />
+          )}
+        />
+      );
+
     case FieldType.Text:
     default:
       return (
@@ -101,7 +219,7 @@ const Input: FC<InputProps> = ({
           name={name}
           control={control}
           render={({ field: { onChange, value, onBlur, ref } }) => (
-            <BaseInput
+            <InputBase
               label={label}
               value={value}
               disabled={disabled}

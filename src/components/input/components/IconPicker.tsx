@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { Icon, IconName } from "@/icons/HeroIcons";
 import IconSelectorModal from "@/components/modal/IconSelectorModal";
-import Label from "../Label";
+import Label from "./Label";
 
 interface IconInputProps {
   name: string;

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import Label from "../Label";
+import Label from "./Label";
 
 export interface InputProps {
   type?: "text" | "number" | "email" | "password" | "date" | "time" | string;

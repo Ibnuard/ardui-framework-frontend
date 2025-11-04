@@ -1,17 +1,17 @@
 "use client";
-import Checkbox from "@/components/form/input/Checkbox";
-import Input from "@/components/form/input/InputField";
-import Label from "@/components/form/Label";
+import Checkbox from "@/components/input/components/Checkbox";
+import Input from "@/components/input/components/InputField";
+import Label from "@/components/input/components/Label";
 import Button from "@/components/ui/button/Button";
 import Link from "next/link";
 import { useState } from "react";
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleLogin = async() => {
+  const handleLogin = async () => {
     const res = await fetch("/api/login", {
       method: "POST",
     });
@@ -78,7 +78,7 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm" onClick={handleLogin }>
+                  <Button className="w-full" size="sm" onClick={handleLogin}>
                     Masuk
                   </Button>
                 </div>

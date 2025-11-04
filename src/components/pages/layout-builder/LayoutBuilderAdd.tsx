@@ -1,7 +1,7 @@
 "use client";
 
 import { ComponentCard, HeaderActionCard } from "@/components/card";
-import Label from "@/components/form/Label";
+import Label from "@/components/input/components/Label";
 import { Input } from "@/components/input";
 import ComponentSelectorModal from "@/components/modal/ComponentSelectorModal";
 import LoadingPage from "@/components/ui/loading/LoadingPage";
