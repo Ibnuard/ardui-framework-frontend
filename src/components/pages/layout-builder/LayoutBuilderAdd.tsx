@@ -11,10 +11,20 @@ import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { Option } from "@/components/input/components/CustomSelect";
+
+interface ComponentProps {
+  type: FieldType;
+  label: string;
+  optionList: Option[];
+  id: number;
+  required: boolean;
+}
 
 export default function LayoutBuilderAdd() {
   // state handling
   const [loading, setLoading] = useState(true);
+  const [inputConfig, setInputConfig] = useState<ComponentProps[]>([]);
 
   // handle navigation behavior
   const router = useRouter();
@@ -32,11 +42,7 @@ export default function LayoutBuilderAdd() {
   }, [params]);
 
   // handling form
-  const methods = useForm({
-    defaultValues: {
-      "module-id": "",
-    },
-  });
+  const methods = useForm({});
 
   const onSubmit = (data: any) => {
     console.log("Form submitted:", data);
@@ -48,6 +54,19 @@ export default function LayoutBuilderAdd() {
 
   if (loading) {
     return <LoadingPage />;
+  }
+
+  function handleOnSelected(componentType: FieldType) {
+    setInputConfig((prev: ComponentProps[]) => [
+      ...prev,
+      {
+        type: componentType,
+        label: "Test",
+        optionList: [{ label: "Test", value: "value" }],
+        id: prev.length + 1,
+        required: false,
+      },
+    ]);
   }
 
   return (
@@ -72,11 +91,27 @@ export default function LayoutBuilderAdd() {
         customActionButton={
           <ComponentSelectorModal
             buttonTitle="Add Component"
-            onSelect={() => {}}
+            onSelect={handleOnSelected}
           />
         }
       >
-        test
+        {inputConfig.length > 0 ? (
+          <FormProvider {...methods}>
+            {inputConfig.map((item, index) => (
+              <div className="p-2.5 border-2 rounded-lg hover:bg-gray-50 hover:cursor-pointer">
+                <Input
+                  key={index}
+                  disabled
+                  optionList={item.optionList}
+                  name="input-text"
+                  type={item.type}
+                />
+              </div>
+            ))}
+          </FormProvider>
+        ) : (
+          <p className="text-center text-gray-500 py-8">No component</p>
+        )}
       </ComponentCard>
     </div>
   );

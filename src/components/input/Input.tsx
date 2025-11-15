@@ -32,7 +32,6 @@ const Input: FC<InputProps> = ({
   disabled,
 }) => {
   const {
-    register,
     control,
     formState: { errors },
   } = useFormContext();
